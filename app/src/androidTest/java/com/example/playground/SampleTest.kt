@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.performSemanticsAction
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -55,7 +53,8 @@ class BlaFragment : Fragment() {
     ): View? {
         return ComposeView(requireContext()).apply {
             setContent {
-                ErrorScreen()
+//                SampleScreen()
+                Buttons()
             }
         }
     }
