@@ -1,12 +1,13 @@
 package com.example.playground
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.test.assertIsFocused
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -20,11 +21,14 @@ import org.junit.Test
 @HiltAndroidTest
 class SampleTest {
 
-    @get:Rule
+    @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
 
-    @get:Rule
-    val rule = createComposeRule()
+//    @get:Rule
+//    val rule = createComposeRule()
+
+    @get:Rule(order = 1)
+    val rule = createAndroidComposeRule<HiltTestActivity>()
 
     @Before
     fun setup() {
@@ -37,9 +41,7 @@ class SampleTest {
 
         rule.waitForIdle()
 
-//        rule.onNodeWithTag("button").performSemanticsAction(SemanticsActions.RequestFocus)
-//
-//        rule.waitForIdle()
+        Log.d("Pikachu", "sampleTest: Done waiting for idle")
 
         rule.onNodeWithTag("button").assertIsFocused()
     }
@@ -53,7 +55,6 @@ class BlaFragment : Fragment() {
     ): View? {
         return ComposeView(requireContext()).apply {
             setContent {
-//                SampleScreen()
                 Buttons()
             }
         }
